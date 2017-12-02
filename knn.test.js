@@ -27,13 +27,22 @@ csv
 
 
 const Run = ()=>{
-   console.time("knn-time:")
+    console.time("knn-time:")
     console.log('running knn algorithm..')
 
      let listKResult = [],myKnn = new MyKNearestNeighbor(rawDataTraining,rawValidationData);
 
-     listKResult.push(myKnn.runTesting(2,'Hoax','Result',['Berita','Hoax']))
+    for(let i=1;i<=5;i++){
+        let result = myKnn.runTesting(i,'Hoax','Result',['Berita','Hoax'])
+        listKResult.push({k:result.k,accuracy:result.accuracy})
 
-    console.log(listKResult)
+        csv
+            .writeToPath(`./output/Testing${i}.csv`,result.data,{headers:true,delimiter:';'})
+            .on('finish',()=>{
+
+            })
+    }
+    console.log(`testing result`,listKResult)
+
     console.timeEnd("knn-time:")
 }

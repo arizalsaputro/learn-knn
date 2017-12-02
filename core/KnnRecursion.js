@@ -99,7 +99,8 @@ class KnnRecursion{
         let result = this.processOne(k,classifiedName,resultName,exceptFieldName,0,this.validation,this.training,objKeyList)
         return {
             k:k,
-            accuracy:this.calculateAccuracy(result,classifiedName,resultName)
+            accuracy:this.calculateAccuracy(result,classifiedName,resultName),
+            data:result
         }
 
     }
