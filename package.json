@@ -1,0 +1,19 @@
+{
+  "name": "knn",
+  "version": "1.0.0",
+  "description": "learning k-nn",
+  "main": "knn.js",
+  "scripts": {
+    "test": "node knn.test.js",
+    "start": "node knn.js"
+  },
+  "keywords": [
+    "knn",
+    "learning"
+  ],
+  "author": "arizalsaputro",
+  "license": "ISC",
+  "dependencies": {
+    "fast-csv": "^2.4.1"
+  }
+}
