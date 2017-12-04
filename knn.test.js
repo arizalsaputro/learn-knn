@@ -21,7 +21,7 @@ csv
     .on('end',()=>{
         console.log(`done read data ${path}`)
         console.time('time-read:')
-        rawValidationData = rawDataTraining.slice(rawDataTraining.length-validationLength-1,rawDataTraining.length)
+        rawValidationData = rawDataTraining.slice(rawDataTraining.length-validationLength,rawDataTraining.length)
         Run();
     })
 
@@ -30,18 +30,16 @@ const Run = ()=>{
     console.time("knn-time:")
     console.log('running knn algorithm..')
 
-     let listKResult = [],myKnn = new MyKNearestNeighbor(rawDataTraining,rawValidationData);
+    let listKResult = [],myKnn = new MyKNearestNeighbor(rawDataTraining,rawValidationData);
+    let result = myKnn.runTesting(1,'Hoax','Result',['Berita','Hoax'])
+    listKResult.push({k:result.k,accuracy:result.accuracy})
+    csv
+        .writeToPath(`./output/Testing1.csv`,result.data,{headers:true,delimiter:';'})
+        .on('finish',()=>{
 
-    for(let i=1;i<=5;i++){
-        let result = myKnn.runTesting(i,'Hoax','Result',['Berita','Hoax'])
-        listKResult.push({k:result.k,accuracy:result.accuracy})
+        })
 
-        csv
-            .writeToPath(`./output/Testing${i}.csv`,result.data,{headers:true,delimiter:';'})
-            .on('finish',()=>{
 
-            })
-    }
     console.log(`testing result`,listKResult)
 
     console.timeEnd("knn-time:")
